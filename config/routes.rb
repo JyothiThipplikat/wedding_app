@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
-  # STEP 1: A ROUTE triggers a controller action
-  # verb "/urls" => "namespace/controllers#action"
+  namespace :api do
+    get "/vendors" => "vendors#index"
+    get "vendors/:id" => "vendors#show"
+    post "/vendors" => "vendors#create"
+    patch "vendors/:id" => "vendors#update"
+    delete "/vendors/:id" => "vendors#destroy"
+  end
 end
