@@ -28,7 +28,7 @@ class Api::TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 
     @tag.name = params[:name] || @tag.name
-    @tag.specialty = parms[:specialty] || @tag.specialty
+    @tag.specialty = params[:specialty] || @tag.specialty
 
     if @tag.save
       render "show.json.jbuilder"

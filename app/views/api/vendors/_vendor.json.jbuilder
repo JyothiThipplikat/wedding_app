@@ -6,3 +6,8 @@ json.description vendor.description
 json.email vendor.email
 json.availability vendor.availability
 # json.price vendor.price
+
+json.images do
+  json.array! product.images, partial: 'api/images/image', as: :image 
+end
+

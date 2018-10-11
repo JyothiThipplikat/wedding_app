@@ -1,1 +1,1 @@
-json.array! @tags, partial: "tag", as: :tag
+json.array! @tags, partial: 'tag', as: :tag

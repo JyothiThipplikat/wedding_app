@@ -10,14 +10,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_07_211823) do
+ActiveRecord::Schema.define(version: 2018_10_11_010853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bookings", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "carted_vendors", force: :cascade do |t|
+    t.string "status"
+    t.integer "order_id"
+    t.integer "vendor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.string "url"
+    t.boolean "primary_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.string "specialty"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "specialty"
+  end
+
+  create_table "vendor_tags", force: :cascade do |t|
+    t.integer "vendor_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,6 +62,7 @@ ActiveRecord::Schema.define(version: 2018_10_07_211823) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "availability", default: true
+    t.decimal "price", precision: 9, scale: 2
   end
 
 end
