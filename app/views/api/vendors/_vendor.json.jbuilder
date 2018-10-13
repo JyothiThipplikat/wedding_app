@@ -7,7 +7,10 @@ json.email vendor.email
 json.availability vendor.availability
 # json.price vendor.price
 
-json.images do
-  json.array! product.images, partial: 'api/images/image', as: :image 
+json.tags do
+  json.array! vendor.tags, partial: 'api/tags/tag', as: :tag
 end
 
+json.images do
+  json.array! vendor.images, partial: 'api/images/image', as: :image 
+end

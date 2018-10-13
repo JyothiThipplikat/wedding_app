@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   namespace :api do
+    post '/users' => 'users#create'
+
+    post "/sessions" => "sessions#create"
+
+    get "/images" => "images#index"
+    get "/images/:id" => "images#show"
+    post "/images" => "images#create"
+    patch "/images/:id" => "images#update"
+    delete "/images/:id" => "images#destroy"
+
     get "/tags" => "tags#index"
     get "/tags/:id" => "tags#show"
     post "/tags" => "tags#create"

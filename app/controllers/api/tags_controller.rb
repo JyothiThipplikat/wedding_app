@@ -19,7 +19,7 @@ class Api::TagsController < ApplicationController
     if @tag.save
       render 'show.json.jbuilder'
     else
-      render json: {errors: @vendor.errors.full_messages},
+      render json: {errors: @tag.errors.full_messages},
       status: :unprocessable_entity
     end
   end
@@ -33,7 +33,7 @@ class Api::TagsController < ApplicationController
     if @tag.save
       render "show.json.jbuilder"
     else
-      render json: {errors:@products.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors:@tags.errors.full_messages}, status: :unprocessable_entity
     end
   end
 

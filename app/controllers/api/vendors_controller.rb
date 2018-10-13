@@ -45,7 +45,7 @@ class Api::VendorsController < ApplicationController
     if @vendor.save
       render "show.json.jbuilder"
     else
-      render json: {errors:@products.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors:@vendors.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
