@@ -5,11 +5,6 @@ class Api::ImagesController < ApplicationController
     render 'index.json.jbuilder'
   end
 
-  def show
-    @image = Image.find(params[:id])
-    render 'show.json.jbuilder'
-  end
-
   def create
     @image = Image.new(
                       vendor_id: params[:vendor_id],
@@ -23,6 +18,11 @@ class Api::ImagesController < ApplicationController
       render json: {errors: @image.errors.full_messages},
       status: :unprocessable_entity
     end
+  end
+
+  def show
+    @image = Image.find(params[:id])
+    render 'show.json.jbuilder'
   end
 
   def update

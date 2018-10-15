@@ -5,7 +5,7 @@ json.phone_number vendor.phone_number
 json.description vendor.description
 json.email vendor.email
 json.availability vendor.availability
-# json.price vendor.price
+json.price vendor.price
 
 json.tags do
   json.array! vendor.tags, partial: 'api/tags/tag', as: :tag

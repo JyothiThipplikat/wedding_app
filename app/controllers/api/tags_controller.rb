@@ -5,11 +5,6 @@ class Api::TagsController < ApplicationController
     render 'index.json.jbuilder'
   end
 
-  def show
-    @tag = Tag.find(params[:id])
-    render 'show.json.jbuilder'
-  end
-
   def create
     @tag = Tag.new(
                   name: params[:name],
@@ -22,6 +17,11 @@ class Api::TagsController < ApplicationController
       render json: {errors: @tag.errors.full_messages},
       status: :unprocessable_entity
     end
+  end
+
+  def show
+    @tag = Tag.find(params[:id])
+    render 'show.json.jbuilder'
   end
 
   def update
