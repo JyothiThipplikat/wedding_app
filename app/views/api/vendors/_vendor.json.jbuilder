@@ -14,3 +14,7 @@ end
 json.images do
   json.array! vendor.images, partial: 'api/images/image', as: :image 
 end
+
+json.reviews do
+  json.array! vendor.reviews, partial: 'api/reviews/review', as: :review
+end

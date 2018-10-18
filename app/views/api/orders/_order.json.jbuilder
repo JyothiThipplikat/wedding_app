@@ -1,5 +1,5 @@
 json.id order.id
-json.current_user order.current_user
+json.user order.user
 json.total order.total
 
 json.formatted do

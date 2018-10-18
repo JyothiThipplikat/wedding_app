@@ -4,9 +4,10 @@ class Order < ApplicationRecord
   has_many :carted_vendors
   has_many :vendors, through: :carted_vendors
 
-
-  def total
-    carted_vendors.sum { |carted_vendor| vendor.price }
+  def find_total
+    carted_vendors.each do |carted_vendor|
+      self.total += carted_vendor.vendor.price 
+    end
+    p self.total
   end
-
 end

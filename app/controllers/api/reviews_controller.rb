@@ -1,10 +1,18 @@
 class Api::ReviewsController < ApplicationController
+  before_action :authenticate_user
+
+  def index
+    @reviews = current_user.reviews
+    render 'index.json.jbuilder'
+  end
+  
 
   def create
-    @review = Review.new(
-                        post: params[:post],
-                        date: params[:date]
-                  )
+    @review = Review.create(user_id: current_user.id,
+                            vendor_id: params[:vendor_id],
+                            post: params[:post],
+                            date: params[:date]
+                            )
 
     if @review.save
       render 'show.json.jbuilder'

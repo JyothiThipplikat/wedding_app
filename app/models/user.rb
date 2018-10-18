@@ -7,6 +7,7 @@ class User < ApplicationRecord
   
   has_many :reviews
   has_many :bookings
+  has_many :vendors, through: :bookings
 
   has_many :priorities
   has_many :tags, through: :priorities

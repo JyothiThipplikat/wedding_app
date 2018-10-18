@@ -1,27 +1,19 @@
 class Api::UsersController < ApplicationController
   
   def create
-    user = User.new(
+    @user = User.new(
       email: params[:email],
       password: params[:password],
       password_confirmation: params[:password_confirmation],
-      date: params[:date],
+      date: params[:date].to_i,
       budget: params[:budget]
       
     )
 
-    if user.save
+    if @user.save
       render json: {message: 'User created successfully'}, status: :created
     else
       render json: {errors: user.errors.full_messages}, status: :bad_request
-    end
-  end
-
-  def show
-    if current_user.merchant
-      render "merchant_show.json.builder"
-    else
-      render "customer_show.json.jbuilder"
     end
   end
 

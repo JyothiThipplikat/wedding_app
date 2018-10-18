@@ -1,8 +1,8 @@
 class Api::VendorsController < ApplicationController
 
   def index
-    @vendors = Vendor.all
-
+    @vendors = current_user.shopping_cart
+    
     render 'index.json.jbuilder'
   end
 
