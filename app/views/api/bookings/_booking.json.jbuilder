@@ -1,0 +1,1 @@
+json.vendor_id booking.vendor_id

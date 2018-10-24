@@ -8,9 +8,11 @@ class Api::OrdersController < ApplicationController
 
   def create 
     @order = Order.create(user_id: current_user.id)
+    carted_vendors = CartedVendors.where(user_id: current_user.id)
     @order.find_total
     @order.save
     render 'show.json.jbuilder'
 
   end
+
 end

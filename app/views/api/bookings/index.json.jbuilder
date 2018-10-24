@@ -1,0 +1,1 @@
+json.array! @bookings, partial: "booking", as: :booking

@@ -2,7 +2,7 @@ class Api::CartedVendorsController < ApplicationController
 before_action :authenticate_user
 
   def index
-    @carted_vendors = CartedVendor.all
+    @carted_vendors = current_user.shopping_cart
     render 'index.json.jbuilder'
   end
 

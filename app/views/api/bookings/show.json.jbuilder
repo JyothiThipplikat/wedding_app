@@ -1,0 +1,1 @@
+json.partial! @booking, partial: "bookings", as: :booking

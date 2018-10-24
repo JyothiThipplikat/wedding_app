@@ -26,4 +26,9 @@ class User < ApplicationRecord
     carted_vendors.where(status: "carted")
   end
 
+ 
+  def budget_out(budget, percent_hash)
+    percent_hash.map {|specialty_tag, percentage_allotted| [specialty_tag, self.budget * percentage_allotted / 100] }.to_h
+  end
+  
 end

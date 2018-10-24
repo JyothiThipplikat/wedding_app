@@ -2,6 +2,11 @@ class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :vendor
 
-  validates :date, uniqueness: {scope: [:date], :message => " already booked"}
-  
+ validate :no_double_bookings
+ 
+ def no_double_bookings
+   unless vendor.available?(user.date)
+     errors.add(:vendor, "can't be booked on this date")
+   end
+ end
 end
