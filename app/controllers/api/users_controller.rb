@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
                     email: params[:email],
                     password: params[:password],
                     password_confirmation: params[:password_confirmation],
-                    date: params[:date].to_i,
+                    date: params[:date],
                     budget: params[:budget]
                    )
 
@@ -17,21 +17,27 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user= User.find(params[:id])
-    render 'customer_show.json.jbuilder'
+    if current_user.merchant? == false
+      render 'customer_show.json.jbuilder'
+    else
+      render 'merchant_show.json.jbuilder'
+    end
   end
 
 
   def update
     @user = User.find(params[:id])
+    if current_user.id == @user.id
+      @user.date = params[:date] || @user.date
+      @user.budget = params[:budget] || @user.budget
 
-    @user.date = params[:date] || @user.date
-    @user.budget = params[:budget] || @user.budget
-
-    if @user.save
-      render "customer_show.json.jbuilder"
+      if @user.save
+        render "customer_show.json.jbuilder"
+      else
+        render json: {errors:@users.errors.full_messages}, status: :unprocessable_entity
+      end
     else
-      render json: {errors:@users.errors.full_messages}, status: :unprocessable_entity
+      render json: {errors: ["You are not authorized to update this user!"]}, status: :unprocessable_entity
     end
   end
 end

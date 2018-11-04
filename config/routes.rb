@@ -2,9 +2,13 @@ Rails.application.routes.draw do
   namespace :api do
     get "/users/:id" => "users#show"
     post "/users" => "users#create"
-    patch "users/:id" => "users#update"
+    patch "/users/:id" => "users#update"
 
     post "/sessions" => "sessions#create"
+
+    post "/priorities" => "priorities#create"
+
+    post "/bookings"=> "bookings#create"
 
     get "/images" => "images#index"
     post "/images" => "images#create"
@@ -25,13 +29,13 @@ Rails.application.routes.draw do
 
     get "/vendors" => "vendors#index"
     post "/vendors" => "vendors#create"
-    get "vendors/:id" => "vendors#show"
-    patch "vendors/:id" => "vendors#update"
+    get "/vendors/:id" => "vendors#show"
+    patch "/vendors/:id" => "vendors#update"
     delete "/vendors/:id" => "vendors#destroy"
 
     get "/carted_vendors" => "carted_vendors#index"
     post "/carted_vendors" => "carted_vendors#create"
-    get "carted_vendors/:id" => "carted_vendors#show"
+    get "/carted_vendors/:id" => "carted_vendors#show"
     delete "/carted_vendors/:id" => "carted_vendors#destroy"
 
     get "/orders" => "orders#index"

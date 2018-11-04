@@ -6,16 +6,20 @@ class Api::PrioritiesController < ApplicationController
    end
 
    def create 
-     @priority = Priority.create(user_id: current_user.id,
-                                 tag_id: params[:tag_id],
-                                 percentage: params[:percentage]
-                                )
-     
-     @priority.new_key
-     @priority.removed_key
-     @priority.changed_key
-     @priority.total_change
-     @priority.save
-     render 'show.json.jbuilder'
+    old_priorities = current_user.priorities_hash
+    p old_priorities
+
+    @priority = Priority.create(user_id: current_user.id,
+                               tag_id: params[:tag_id],
+                               percentage: params[:percentage]
+                              )
+
+    modified_priorities = current_user.priorities_hash
+    p modified_priorities
+
+    new_priorities = current_user.total_change(old_priorities, modified_priorities)
+
+    
+    render 'show.json.jbuilder'
    end
 end

@@ -5,11 +5,23 @@ class Order < ApplicationRecord
   has_many :vendors, through: :carted_vendors
 
   def find_total
-    self.total = 0
-    carted_vendors.each do |carted_vendor|
-      self.total += carted_vendor.vendor.price 
+    vendors = find_vendors 
+    sum = 0
+    vendors.each do |vendor|
+      puts vendor.price
+      sum += vendor.price 
     end
-    return self.total
+    self.total = sum
+    p total
   end
 
+  def find_vendors
+    carted_vendors = CartedVendor.where(order_id: id)
+    
+    vendors = []
+    carted_vendors.each do |carted_vendor|
+      vendors << Vendor.find(carted_vendor.vendor_id)
+    end
+    return vendors
+  end
 end

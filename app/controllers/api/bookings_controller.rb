@@ -6,9 +6,8 @@ class Api::BookingsController < ApplicationController
                               vendor_id: params[:vendor_id]
                               )
       
-      if @booking.save
-         vendor.availability == false
-         render 'show.json.jbuilder'
-    end
+    @booking.save
+    @booking.no_double_bookings
+    render 'show.json.jbuilder'
   end
 end
