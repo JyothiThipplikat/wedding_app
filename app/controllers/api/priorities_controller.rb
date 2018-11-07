@@ -5,21 +5,31 @@ class Api::PrioritiesController < ApplicationController
     render 'index.json.jbuilder'
    end
 
-   def create 
+   def change 
     old_priorities = current_user.priorities_hash
-    p old_priorities
 
-    @priority = Priority.create(user_id: current_user.id,
-                               tag_id: params[:tag_id],
-                               percentage: params[:percentage]
-                              )
+    if old_priorities.sum {|priority_name, percentage| percentage } == 100 #keep this check
 
-    modified_priorities = current_user.priorities_hash
-    p modified_priorities
+      priority = Priority.find_or_create_by(tag_id: params[:tag_id], user_id: current_user.id) 
+      priority.update(percentage: params[:percentage])
+      priority.destroy if priority.percentage == 0
 
-    new_priorities = current_user.total_change(old_priorities, modified_priorities)
+      modified_priorities = current_user.priorities_hash
 
-    
-    render 'show.json.jbuilder'
+      new_priorities = current_user.total_change(old_priorities, modified_priorities)
+
+      new_priorities.each do |tag_name, new_percentage|
+        tag = Tag.find_by(name: tag_name) 
+        priority = current_user.priorities.find_by(tag_id: tag.id)
+        priority.percentage = new_percentage
+        priority.save
+      end
+
+      @priorities = current_user.priorities
+      
+      render 'index.json.jbuilder'
+    else
+      render json: {errors: ["priorities are not balanced"]}, status: :bad_request
+    end
    end
 end

@@ -1,11 +1,10 @@
-json.id current_user.id
-json.email current_user.email
-json.date current_user.date
-json.budget current_user.budget
+json.id @user.id
+json.email @user.email
+json.date @user.date
+json.budget @user.budget
 
 
-
-
+# json.company_name @user.vendor
 
 
 

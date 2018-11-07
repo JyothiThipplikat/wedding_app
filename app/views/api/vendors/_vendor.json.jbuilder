@@ -6,6 +6,8 @@ json.description vendor.description
 json.email vendor.email
 json.availability vendor.availability
 json.price vendor.price
+json.primary_image vendor.images.select { |v| v.primary_image }
+
 
 json.tags do
   json.array! vendor.tags, partial: 'api/tags/tag', as: :tag
@@ -17,4 +19,4 @@ end
 
 json.reviews do
   json.array! vendor.reviews, partial: 'api/reviews/review', as: :review
-end
+end.

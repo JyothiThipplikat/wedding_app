@@ -1,8 +1,7 @@
 class Api::VendorsController < ApplicationController
 
   def index
-    @vendors = Vendor.all
-    
+    @vendors = Vendor.all 
     render 'index.json.jbuilder'
   end
 

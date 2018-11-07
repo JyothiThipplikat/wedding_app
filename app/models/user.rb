@@ -35,6 +35,7 @@ class User < ApplicationRecord
     priorities.map {|priority| priority.tag }
   end
 
+  # finds all priority objects and makes a hash of priorities
   def priorities_hash
     priorities.map { |priority_object| [priority_object.tag.name, priority_object.percentage] }.to_h
   end
@@ -87,5 +88,17 @@ class User < ApplicationRecord
   def budget_out(budget, percent_hash)
     percent_hash.map {|specialty_tag, percentage_allotted| [specialty_tag, self.budget * percentage_allotted / 100] }.to_h
   end
-  
+
+  # Finds vendors within the price limit
+
+  def services_within_budget(priority)
+    money_to_spend_on_this_speciality = priority.percentage * budget 
+    vendors_with_tag = Tag.find(priority.tag_id).vendors
+   
+    vendors_within_budget = vendors_with_tag.select { |vendor| vendor.price <= money_to_spend_on_this_speciality }
+  end
+
+  def formatted_vendors_within_budget(priority)
+    services_within_budget(priority).map { |v| v.company_name }
+  end
 end

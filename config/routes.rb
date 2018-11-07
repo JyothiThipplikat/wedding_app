@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
     post "/sessions" => "sessions#create"
 
-    post "/priorities" => "priorities#create"
-
+    get "/priorities" => "priorities#index"
+    post "/change_priorities" => "priorities#change"
+    
     post "/bookings"=> "bookings#create"
 
     get "/images" => "images#index"

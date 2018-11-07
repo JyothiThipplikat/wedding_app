@@ -17,17 +17,19 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    if current_user.merchant? == false
-      render 'customer_show.json.jbuilder'
-    else
-      render 'merchant_show.json.jbuilder'
-    end
+    render 'customer_show.json.jbuilder'
+    # if current_user.merchant? == false
+    #   render 'customer_show.json.jbuilder'
+    # else 
+    #   render 'merchant_show.json.jbuilder'
+    # end
   end
 
 
   def update
     @user = User.find(params[:id])
-    if current_user.id == @user.id
+    
+    if @user && current_user.id == @user.id
       @user.date = params[:date] || @user.date
       @user.budget = params[:budget] || @user.budget
 
