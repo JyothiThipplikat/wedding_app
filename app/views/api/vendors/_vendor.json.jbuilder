@@ -6,6 +6,7 @@ json.description vendor.description
 json.email vendor.email
 json.availability vendor.availability
 json.price vendor.price
+
 json.primary_image vendor.images.select { |v| v.primary_image }
 
 

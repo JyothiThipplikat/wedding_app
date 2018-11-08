@@ -98,7 +98,9 @@ class User < ApplicationRecord
     vendors_within_budget = vendors_with_tag.select { |vendor| vendor.price <= money_to_spend_on_this_speciality }
   end
 
-  def formatted_vendors_within_budget(priority)
-    services_within_budget(priority).map { |v| v.company_name }
+ def formatted_vendors_within_budget(priority)
+  services_within_budget(priority).map { |v| v.company_name }
   end
+
+  
 end

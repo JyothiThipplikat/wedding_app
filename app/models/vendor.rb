@@ -16,4 +16,5 @@ class Vendor < ApplicationRecord
   def available?(compare_date)
     !(users.map {|user| user.date }.include?(compare_date))
   end
+
 end
