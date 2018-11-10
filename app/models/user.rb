@@ -91,16 +91,14 @@ class User < ApplicationRecord
 
   # Finds vendors within the price limit
 
-  def services_within_budget(priority)
+  def vendors_within_budget(priority)
     money_to_spend_on_this_speciality = priority.percentage * budget 
     vendors_with_tag = Tag.find(priority.tag_id).vendors
-   
-    vendors_within_budget = vendors_with_tag.select { |vendor| vendor.price <= money_to_spend_on_this_speciality }
+    vendors_with_tag.select { |vendor| vendor.price <= money_to_spend_on_this_speciality }
   end
 
- def formatted_vendors_within_budget(priority)
-  services_within_budget(priority).map { |v| v.company_name }
-  end
+  # def formatted_vendors_within_budget(priority)
+  #   services_within_budget(priority)
+  # end
 
-  
 end
