@@ -66,6 +66,11 @@ class User < ApplicationRecord
 
   def total_change(hash_1, hash_2)
     changed_value = new_key(hash_1, hash_2) || removed_key(hash_1, hash_2) || changed_key(hash_1, hash_2) 
+    puts "=" * 50
+    puts "=" * 50
+    p changed_value
+    puts "=" * 50
+    puts "=" * 50
     original_percentages = hash_2.map {|key, value| [key, nil]}.to_h
 
     old_leftover = 100 - changed_value[:from]

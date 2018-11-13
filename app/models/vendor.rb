@@ -27,4 +27,5 @@ class Vendor < ApplicationRecord
   end
 
 
+
 end

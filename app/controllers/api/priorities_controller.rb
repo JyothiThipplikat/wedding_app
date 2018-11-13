@@ -50,8 +50,13 @@ class Api::PrioritiesController < ApplicationController
 
    def change 
     old_priorities = current_user.priorities_hash
-
-    if old_priorities.sum {|priority_name, percentage| percentage } == 100 #keep this check
+    percentage_sum = old_priorities.sum {|priority_name, percentage| percentage }
+    puts "*" * 50
+    puts "*" * 50
+    p percentage_sum
+    puts "*" * 50
+    puts "*" * 50
+    if percentage_sum > 99 && percentage_sum <= 100 #keep this check
 
       priority = Priority.find_or_create_by(tag_id: params[:tag_id], user_id: current_user.id) 
       priority.update(percentage: params[:percentage])
